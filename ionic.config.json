@@ -1,0 +1,7 @@
+{
+  "name": "indoorAnalyticsInterface",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
