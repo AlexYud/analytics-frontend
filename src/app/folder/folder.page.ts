@@ -10,38 +10,31 @@ export class FolderPage implements OnInit {
   public folder!: string;
   private activatedRoute = inject(ActivatedRoute);
 
-  public list = [
-    {
-      id: '0',
-      name: 'test1',
-      price: '12.99',
-      inventory: '1'
-    },
-    {
-      id: '1',
-      name: 'test1',
-      price: '12.99',
-      inventory: '1'
-    },
-    {
-      id: '2',
-      name: 'test1',
-      price: '12.99',
-      inventory: '1'
-    },
-    {
-      id: '3',
-      name: 'test1',
-      price: '12.99',
-      inventory: '1'
-    },
-  ]
-
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
+    switch (this.folder) {
+      case 'merchants':
+        break;
+      case 'facilities':
+        console.log(this.folder);
+        break;
+      case 'services':
+        console.log(this.folder);
+        break;
+      case 'devices':
+        console.log(this.folder);
+        break;
+      case 'beacons':
+        console.log(this.folder);
+        break;
+
+      default:
+        console.log("home");
+
+        break;
+    }
+
   }
-
-
 }
