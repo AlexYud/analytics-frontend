@@ -7,13 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FolderPageRoutingModule } from './folder-routing.module';
 
 import { FolderPage } from './folder.page';
-import { ChartComponent } from '../components/chart/chart.component';
-import { NgChartsModule } from 'ng2-charts';
-import { BarChartComponent } from '../components/bar-chart/bar-chart.component';
-import { LineChartComponent } from '../components/line-chart/line-chart.component';
-import { DoughnutChartComponent } from '../components/doughnut-chart/doughnut-chart.component';
-import { BubbleChartComponent } from '../components/bubble-chart/bubble-chart.component';
-import { ScatterChartComponent } from '../components/scatter-chart/scatter-chart.component';
+import { TableComponent } from '../components/table/table.component';
 
 @NgModule({
   imports: [
@@ -21,16 +15,11 @@ import { ScatterChartComponent } from '../components/scatter-chart/scatter-chart
     FormsModule,
     IonicModule,
     FolderPageRoutingModule,
-    NgChartsModule
+
   ],
   declarations: [
     FolderPage,
-    ChartComponent,
-    BarChartComponent,
-    LineChartComponent,
-    DoughnutChartComponent,
-    BubbleChartComponent,
-    ScatterChartComponent,
+    TableComponent,
   ]
 })
 export class FolderPageModule {}

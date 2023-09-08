@@ -1,0 +1,68 @@
+<ion-grid>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="11">
+      <ion-card class="ion-text-center ion-padding " color="light">
+        <ion-grid>
+          <ion-row style="border-bottom: groove;">
+            <ion-col col-3>
+              <ion-label>ID</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>{{ name }}</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>Edit</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>Details</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>Delete</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="data.length === 0">
+            <ion-title class="ion-padding-top ion-margin">
+              <ion-note style="font-size: 1em;">
+                No items...
+              </ion-note>
+            </ion-title>
+          </ion-row>
+          <ion-row style="border-bottom: groove;" *ngFor="let item of data" class="ion-align-items-center">
+            <ion-col>
+              <ion-label>{{ item.id }}</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>{{ item.name || item.publicIdentifier }}</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-col>
+                <ion-button size="small" color="secondary">
+                  <ion-icon slot="icon-only" name="pencil"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-col>
+            <ion-col>
+              <ion-col>
+                <ion-button size="small" color="primary" (click)="details(item.id)">
+                  <ion-icon slot="icon-only" name="arrow-forward-circle"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-col>
+            <ion-col>
+              <ion-button size="small" color="danger" (click)="delete(item.id)">
+                <ion-icon slot="icon-only" name="trash-sharp"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <br>
+          <ion-button color="success" (click)="add()">
+            <ion-icon slot="end" name="add-circle-sharp"></ion-icon>
+            <ion-label>ADD</ion-label>
+          </ion-button>
+          <br>
+          <br>
+        </ion-grid>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
