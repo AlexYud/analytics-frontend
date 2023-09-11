@@ -10,12 +10,19 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  add(entityName: string, data: any): Observable<any> {
+    const { name } = data;
+    if (entityName === 'beacons') return this.http.post<any>(`${this.url}${entityName}/`, { publicIdentifier: name });
+    return this.http.post<any>(`${this.url}${entityName}/`, { name });
+  }
+
   get(entityName: string): Observable<any> {
     return this.http.get<any>(`${this.url}${entityName}/`);
   }
 
-  add(entityName: string, name: string): Observable<any> {
-    if (entityName === 'beacons') return this.http.post<any>(`${this.url}${entityName}/`, { publicIdentifier: name });
+  update(entityName: string, data: any): Observable<any> {
+    const { name } = data;
+    if (entityName === 'beacons') return this.http.put<any>(`${this.url}${entityName}/`, { publicIdentifier: name });
     return this.http.post<any>(`${this.url}${entityName}/`, { name });
   }
 
