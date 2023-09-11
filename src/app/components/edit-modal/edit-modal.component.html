@@ -1,0 +1,23 @@
+<ion-header >
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-title>{{ obj.name }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-input labelPlacement="stacked" label="Name" [(ngModel)]="obj.name" placeholder="Name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-select label="Select Parent" placeholder="Parent" [(ngModel)]="obj.parent">
+      <ion-select-option value="McDonald's">McDonald's</ion-select-option>
+      <ion-select-option value="Burger King">Burger King</ion-select-option>
+      <ion-select-option value="Subway">Subway</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-content>

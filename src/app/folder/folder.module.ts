@@ -8,6 +8,7 @@ import { FolderPageRoutingModule } from './folder-routing.module';
 
 import { FolderPage } from './folder.page';
 import { TableComponent } from '../components/table/table.component';
+import { EditModalComponent } from '../components/edit-modal/edit-modal.component';
 
 @NgModule({
   imports: [
@@ -15,11 +16,11 @@ import { TableComponent } from '../components/table/table.component';
     FormsModule,
     IonicModule,
     FolderPageRoutingModule,
-
   ],
   declarations: [
     FolderPage,
     TableComponent,
+    EditModalComponent,
   ]
 })
 export class FolderPageModule {}
