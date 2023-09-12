@@ -23,7 +23,7 @@ import { ChartComponent } from 'src/app/components/chart/chart.component';
   declarations: [
     DetailsPage,
     ChartComponent,
-    
+
   ]
 })
 export class DetailsPageModule {}

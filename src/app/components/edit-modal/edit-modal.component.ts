@@ -8,7 +8,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class EditModalComponent implements OnInit {
 
-  public obj: any;
+  public name!: string;
 
   constructor(
     private modalCtrl: ModalController
@@ -21,7 +21,7 @@ export class EditModalComponent implements OnInit {
   }
 
   confirm() {
-    return this.modalCtrl.dismiss(this.obj, 'confirm');
+    return this.modalCtrl.dismiss(this.name, 'confirm');
   }
 
 

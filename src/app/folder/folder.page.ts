@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UtilsService } from '../services/utils.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-folder',
@@ -8,14 +9,19 @@ import { UtilsService } from '../services/utils.service';
   styleUrls: ['./folder.page.scss'],
 })
 export class FolderPage implements OnInit {
-  public folder!: string;
+  public entityName!: string;
+  public id!: number;
+  public name!: string;
   private activatedRoute = inject(ActivatedRoute);
 
   constructor(
+    public apiService: ApiService,
     public utilsService: UtilsService,
   ) { }
 
   ngOnInit() {
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
+    this.entityName = this.activatedRoute.snapshot.paramMap.get('entityName') as string;
+    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id') as string);
+    this.name = this.activatedRoute.snapshot.paramMap.get('name') as string;
   }
 }

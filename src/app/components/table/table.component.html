@@ -1,9 +1,8 @@
-<ion-grid >
+<ion-grid>
   <ion-row class="ion-justify-content-center">
     <ion-col size="11">
-      <ion-searchbar class="ion-text-start" show-cancel-button="never" 
-      placeholder="Search by name or id" color="light" type="text"
-        (ionInput)="searchbarInput($event)"></ion-searchbar>
+      <ion-searchbar class="ion-text-start" show-cancel-button="never" placeholder="Search by name or id" color="light"
+        type="text" (ionInput)="searchbarInput($event)"></ion-searchbar>
       <ion-card class="ion-text-center ion-padding " color="light">
         <ion-grid>
           <ion-row style="border-bottom: groove;">
@@ -11,7 +10,9 @@
               <ion-label>ID</ion-label>
             </ion-col>
             <ion-col>
-              <ion-label>{{ utilsService.capitalizeFirstLetter(name) }}</ion-label>
+              <ion-label>{{ utilsService.capitalizeFirstLetter(
+                id === -1 ? utilsService.capitalizeFirstLetter(entityName) : apiService.nextEntity(entityName)
+                )}}</ion-label>
             </ion-col>
             <ion-col>
               <ion-label>Edit</ion-label>
@@ -30,25 +31,24 @@
               </ion-note>
             </ion-title>
           </ion-row>
-          <ion-row style="border-bottom: groove;" *ngFor="let item of results"
-            class="ion-align-items-center">
+          <ion-row style="border-bottom: groove;" *ngFor="let item of results" class="ion-align-items-center">
             <ion-col>
               <ion-label>{{ item.id }}</ion-label>
             </ion-col>
             <ion-col>
-              <ion-label>{{ item.name || item.publicIdentifier }}</ion-label>
+              <ion-label>{{ item.name ? item.name.split('"').join("") : item.publicIdentifier.split('"').join("") }}</ion-label>
             </ion-col>
             <ion-col>
               <ion-col>
-                <ion-button size="small" color="secondary" (click)="edit(item)">
+                <ion-button size="small" color="primary" (click)="edit(item)">
                   <ion-icon slot="icon-only" name="pencil"></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-col>
             <ion-col>
               <ion-col>
-                <ion-button size="small" color="primary" (click)="details(item.id)">
-                  <ion-icon slot="icon-only" name="arrow-forward-circle"></ion-icon>
+                <ion-button size="small" color="primary" (click)="details(item.id, item.name)">
+                  <ion-icon slot="icon-only" name="information"></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-col>

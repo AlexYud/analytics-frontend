@@ -6,18 +6,48 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  public url: string = 'http://ec2-54-94-134-210.sa-east-1.compute.amazonaws.com:3000/';
+  public url: string = 'http://ec2-54-94-46-68.sa-east-1.compute.amazonaws.com:3000/';
+  public entities: string[] = ['merchants', 'facilities', 'environments', 'beacons', 'devices', 'services']
 
   constructor(private http: HttpClient) { }
 
-  add(entityName: string, data: any): Observable<any> {
-    const { name } = data;
+  nextEntity(entityName: string) {
+    const index = this.entities.indexOf(entityName);
+    return this.entities[index + 1];
+  }
+
+  add(entityName: string, name: string): Observable<any> {
+    console.log(`adding: ${entityName}/`);
     if (entityName === 'beacons') return this.http.post<any>(`${this.url}${entityName}/`, { publicIdentifier: name });
     return this.http.post<any>(`${this.url}${entityName}/`, { name });
   }
 
-  get(entityName: string): Observable<any> {
-    return this.http.get<any>(`${this.url}${entityName}/`);
+  linkToParent(entityName: string, parentId: number, id: number): Observable<any> {
+    // if (entityName === 'beacons') return this.http.post<any>(`${this.url}${entityName}/`, { publicIdentifier: name });
+    console.log(`linking: ${entityName}/${parentId}/${this.nextEntity(entityName)}`);
+
+    switch (this.nextEntity(entityName)) {
+      case 'facilities':
+        return this.http.post<any>(`${this.url}${entityName}/${parentId}/${this.nextEntity(entityName)}`, { facility_id: id });
+      case 'environments':
+        return this.http.post<any>(`${this.url}${entityName}/${parentId}/${this.nextEntity(entityName)}`, { environment_id: id });
+      case 'beacons':
+        return this.http.post<any>(`${this.url}${entityName}/${parentId}/${this.nextEntity(entityName)}`, { beacon_id: id });
+      default:
+        console.log("api service link default");
+        return this.http.post<any>(`${this.url}${entityName}/${parentId}/${this.nextEntity(entityName)}`, { id });
+    }
+  }
+
+  get(entityName: string, id: number): Observable<any> {
+    console.log(`req: ${entityName}/${id}/${this.nextEntity(entityName)}`);
+    
+    if (id === -1) {
+      // console.log(`getting: ${entityName}/`);
+      return this.http.get<any>(`${this.url}${entityName}/`);
+    };
+    // console.log(`getting: ${entityName}/${id}/${this.nextEntity(entityName)}`);
+    return this.http.get<any>(`${this.url}${entityName}/${id}/${this.nextEntity(entityName)}`);
   }
 
   update(entityName: string, data: any): Observable<any> {
