@@ -3,12 +3,19 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ utilsService.capitalizeFirstLetter(folder) }}</ion-title>
+    <ion-title>
+      <b>
+        {{ utilsService.capitalizeFirstLetter(name).split('"').join("") }} - 
+        {{ utilsService.capitalizeFirstLetter(
+        id === -1 ? utilsService.capitalizeFirstLetter(entityName) : apiService.nextEntity(entityName)
+        )}}
+      </b>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" color="medium">
-  <div id="container" >
-    <app-table [name]="folder"></app-table>
+  <div id="container">
+    <app-table [entityName]="entityName" [id]="id" [name]="name"></app-table>
   </div>
 </ion-content>
