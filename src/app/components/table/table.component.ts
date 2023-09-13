@@ -73,8 +73,11 @@ export class TableComponent implements OnInit {
     }
   }
 
-  details(id: number, name: string) {
+  details(id: number, name: string, isService: boolean) {
+    this.apiService.isService = isService;
     if (this.id !== -1) {
+      if (this.entityName === 'beacons') return console.log('end');
+      if (isService) return this.router.navigate([`folder/devices/${id}/${name}`]);
       this.router.navigate([`folder/${this.apiService.nextEntity(this.entityName)}/${id}/${name}`]);
     } else {
       this.router.navigate([`folder/${this.entityName}/${id}/${name}`]);
@@ -129,7 +132,10 @@ export class TableComponent implements OnInit {
         });
       }
     }
+  }
 
+  refresh() {
+    this.get();
   }
 
   async openModal(name: string) {

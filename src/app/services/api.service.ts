@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class ApiService {
   public url: string = 'http://ec2-54-94-46-68.sa-east-1.compute.amazonaws.com:3000/';
   public entities: string[] = ['merchants', 'facilities', 'environments', 'beacons', 'devices', 'services']
+  public isService: boolean = false;
 
   constructor(private http: HttpClient) { }
 
@@ -19,12 +20,15 @@ export class ApiService {
   add(entityName: string, name: string): Observable<any> {
     console.log(`adding: ${entityName}/`);
     if (entityName === 'beacons') return this.http.post<any>(`${this.url}${entityName}/`, { publicIdentifier: name });
+    if (this.isService) return this.http.post<any>(`${this.url}services/`, { name });
     return this.http.post<any>(`${this.url}${entityName}/`, { name });
   }
 
   linkToParent(entityName: string, parentId: number, id: number): Observable<any> {
     // if (entityName === 'beacons') return this.http.post<any>(`${this.url}${entityName}/`, { publicIdentifier: name });
     console.log(`linking: ${entityName}/${parentId}/${this.nextEntity(entityName)}`);
+
+    if (this.isService) return this.http.post<any>(`${this.url}beacons/${parentId}/services`, { service_id: id });
 
     switch (this.nextEntity(entityName)) {
       case 'facilities':
@@ -33,6 +37,8 @@ export class ApiService {
         return this.http.post<any>(`${this.url}${entityName}/${parentId}/${this.nextEntity(entityName)}`, { environment_id: id });
       case 'beacons':
         return this.http.post<any>(`${this.url}${entityName}/${parentId}/${this.nextEntity(entityName)}`, { beacon_id: id });
+      case 'devices':
+        return this.http.post<any>(`${this.url}${entityName}/${parentId}/${this.nextEntity(entityName)}`, { device_id: id });
       default:
         console.log("api service link default");
         return this.http.post<any>(`${this.url}${entityName}/${parentId}/${this.nextEntity(entityName)}`, { id });
@@ -40,8 +46,12 @@ export class ApiService {
   }
 
   get(entityName: string, id: number): Observable<any> {
-    console.log(`req: ${entityName}/${id}/${this.nextEntity(entityName)}`);
-    
+    if (this.isService) {
+      //console.log(`get: beacons/${id}/services`);
+      return this.http.get<any>(`${this.url}beacons/${id}/services`);
+    }
+    //console.log(`get: ${entityName}/${id}/${this.nextEntity(entityName)}`);
+
     if (id === -1) {
       // console.log(`getting: ${entityName}/`);
       return this.http.get<any>(`${this.url}${entityName}/`);
