@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UtilsService } from './services/utils.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -14,5 +15,7 @@ export class AppComponent {
     // { title: 'Devices', url: '/folder/devices', icon: 'phone-portrait' },
     // { title: 'Services', url: '/folder/services', icon: 'construct' },
   ]
-  constructor() { }
+  constructor(
+    public utilsService: UtilsService,
+  ) { }
 }

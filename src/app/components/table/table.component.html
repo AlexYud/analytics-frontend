@@ -1,10 +1,24 @@
 <ion-grid>
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+    <ion-col size="9">
+      <ion-searchbar class="ion-text-start" show-cancel-button="never" placeholder="Search by name or id" color="light"
+      type="text" (ionInput)="searchbarInput($event)"></ion-searchbar>
+    </ion-col>
+    <ion-col size="1" >
+      <ion-button color="success" (click)="add()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="1">
+      <ion-button color="secondary" (click)="refresh()">
+        <ion-icon slot="icon-only" name="refresh"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
   <ion-row class="ion-justify-content-center">
     <ion-col size="11">
-      <ion-searchbar class="ion-text-start" show-cancel-button="never" placeholder="Search by name or id" color="light"
-        type="text" (ionInput)="searchbarInput($event)"></ion-searchbar>
       <ion-card class="ion-text-center ion-padding " color="light">
-        <ion-grid>
+        <ion-grid class="ion-padding-bottom">
           <ion-row style="border-bottom: groove;">
             <ion-col col-3>
               <ion-label>ID</ion-label>
@@ -19,6 +33,9 @@
             </ion-col>
             <ion-col>
               <ion-label>Details</ion-label>
+            </ion-col>
+            <ion-col *ngIf="apiService.nextEntity(entityName) === 'beacons'">
+              <ion-label>Services</ion-label>
             </ion-col>
             <ion-col>
               <ion-label>Delete</ion-label>
@@ -36,35 +53,36 @@
               <ion-label>{{ item.id }}</ion-label>
             </ion-col>
             <ion-col>
-              <ion-label>{{ item.name ? item.name.split('"').join("") : item.publicIdentifier.split('"').join("") }}</ion-label>
+              <ion-label>{{ item.name ? item.name.split('"').join("") : item.publicIdentifier.split('"').join("")
+                }}</ion-label>
             </ion-col>
             <ion-col>
               <ion-col>
-                <ion-button size="small" color="primary" (click)="edit(item)">
+                <ion-button disabled size="small" color="primary" (click)="edit(item)">
                   <ion-icon slot="icon-only" name="pencil"></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-col>
             <ion-col>
               <ion-col>
-                <ion-button size="small" color="primary" (click)="details(item.id, item.name)">
+                <ion-button size="small" color="primary" (click)="details(item.id, item.name ? item.name : item.publicIdentifier, false)">
+                  <ion-icon slot="icon-only" name="information"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-col>
+            <ion-col *ngIf="apiService.nextEntity(entityName) === 'beacons'">
+              <ion-col>
+                <ion-button size="small" color="primary" (click)="details(item.id, item.name ? item.name : item.publicIdentifier, true)">
                   <ion-icon slot="icon-only" name="information"></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-col>
             <ion-col>
-              <ion-button size="small" color="danger" (click)="delete(item.id)">
+              <ion-button disabled size="small" color="danger" (click)="delete(item.id)">
                 <ion-icon slot="icon-only" name="trash-sharp"></ion-icon>
               </ion-button>
             </ion-col>
           </ion-row>
-          <br>
-          <ion-button color="success" (click)="add()">
-            <ion-icon slot="end" name="add-circle-sharp"></ion-icon>
-            <ion-label>ADD</ion-label>
-          </ion-button>
-          <br>
-          <br>
         </ion-grid>
       </ion-card>
     </ion-col>
