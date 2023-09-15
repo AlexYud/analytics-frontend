@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  public url: string = 'http://ec2-54-94-46-68.sa-east-1.compute.amazonaws.com:3000/';
+  public url: string = 'http://ec2-18-228-7-188.sa-east-1.compute.amazonaws.com:3000/';
   public entities: string[] = ['merchants', 'facilities', 'environments', 'beacons', 'devices', 'services']
   public isService: boolean = false;
 
@@ -19,6 +19,8 @@ export class ApiService {
 
   add(entityName: string, name: string): Observable<any> {
     console.log(`adding: ${entityName}/`);
+    console.log({ publicIdentifier: name });
+    
     if (entityName === 'beacons') return this.http.post<any>(`${this.url}${entityName}/`, { publicIdentifier: name });
     if (this.isService) return this.http.post<any>(`${this.url}services/`, { name });
     return this.http.post<any>(`${this.url}${entityName}/`, { name });

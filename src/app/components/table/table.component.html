@@ -2,9 +2,9 @@
   <ion-row class="ion-justify-content-center ion-align-items-center">
     <ion-col size="9">
       <ion-searchbar class="ion-text-start" show-cancel-button="never" placeholder="Search by name or id" color="light"
-      type="text" (ionInput)="searchbarInput($event)"></ion-searchbar>
+        type="text" (ionInput)="searchbarInput($event)"></ion-searchbar>
     </ion-col>
-    <ion-col size="1" >
+    <ion-col size="1">
       <ion-button color="success" (click)="add()">
         <ion-icon slot="icon-only" name="add"></ion-icon>
       </ion-button>
@@ -20,19 +20,21 @@
       <ion-card class="ion-text-center ion-padding " color="light">
         <ion-grid class="ion-padding-bottom">
           <ion-row style="border-bottom: groove;">
-            <ion-col col-3>
-              <ion-label>ID</ion-label>
+            <ion-col size="2.5" *ngIf="apiService.nextEntity(entityName) !== 'beacons'">
+              <ion-title><b>ID</b></ion-title>
             </ion-col>
-            <ion-col>
-              <ion-label>{{ utilsService.capitalizeFirstLetter(
+            <ion-col size="2.5">
+              <ion-title>{{ utilsService.capitalizeFirstLetter(
                 id === -1 ? utilsService.capitalizeFirstLetter(entityName) : apiService.nextEntity(entityName)
-                )}}</ion-label>
+                )}}</ion-title>
             </ion-col>
             <ion-col>
               <ion-label>Edit</ion-label>
             </ion-col>
             <ion-col>
-              <ion-label>Details</ion-label>
+              <ion-label>{{ utilsService.capitalizeFirstLetter(
+                id === -1 ? utilsService.capitalizeFirstLetter(apiService.nextEntity(entityName)) : apiService.nextEntity(apiService.nextEntity(entityName))
+                )}}</ion-label>
             </ion-col>
             <ion-col *ngIf="apiService.nextEntity(entityName) === 'beacons'">
               <ion-label>Services</ion-label>
@@ -49,37 +51,39 @@
             </ion-title>
           </ion-row>
           <ion-row style="border-bottom: groove;" *ngFor="let item of results" class="ion-align-items-center">
-            <ion-col>
+            <ion-col size="2.5" *ngIf="apiService.nextEntity(entityName) !== 'beacons'">
               <ion-label>{{ item.id }}</ion-label>
             </ion-col>
-            <ion-col>
+            <ion-col size="2.5">
               <ion-label>{{ item.name ? item.name.split('"').join("") : item.publicIdentifier.split('"').join("")
                 }}</ion-label>
             </ion-col>
             <ion-col>
               <ion-col>
                 <ion-button disabled size="small" color="primary" (click)="edit(item)">
-                  <ion-icon slot="icon-only" name="pencil"></ion-icon>
+                  <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-col>
             <ion-col>
               <ion-col>
-                <ion-button size="small" color="primary" (click)="details(item.id, item.name ? item.name : item.publicIdentifier, false)">
-                  <ion-icon slot="icon-only" name="information"></ion-icon>
+                <ion-button size="small" color="primary"
+                  (click)="details(item.id, item.name ? item.name : item.publicIdentifier, false)">
+                  <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-col>
             <ion-col *ngIf="apiService.nextEntity(entityName) === 'beacons'">
               <ion-col>
-                <ion-button size="small" color="primary" (click)="details(item.id, item.name ? item.name : item.publicIdentifier, true)">
-                  <ion-icon slot="icon-only" name="information"></ion-icon>
+                <ion-button size="small" color="primary"
+                  (click)="details(item.id, item.name ? item.name : item.publicIdentifier, true)">
+                  <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
                 </ion-button>
               </ion-col>
             </ion-col>
             <ion-col>
               <ion-button disabled size="small" color="danger" (click)="delete(item.id)">
-                <ion-icon slot="icon-only" name="trash-sharp"></ion-icon>
+                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
               </ion-button>
             </ion-col>
           </ion-row>

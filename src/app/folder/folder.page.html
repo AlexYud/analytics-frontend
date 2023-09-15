@@ -3,23 +3,17 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title *ngIf="id === -1">
-      <b>
-        Merchants
-      </b>
-    </ion-title>
     <ion-title>
-      <ion-breadcrumbs>
-        <ion-breadcrumb *ngFor="let entity of headerNavBar;" (click)="goTo(entity.url)">
-          {{ entity.name }}
-        </ion-breadcrumb>
-      </ion-breadcrumbs>
+      <b>
+        {{ utilsService.capitalizeFirstLetter(name).split('"').join("") }} -
+        {{ utilsService.capitalizeFirstLetter(
+        id === -1 ? utilsService.capitalizeFirstLetter(entityName) : apiService.nextEntity(entityName)
+        )}}
+      </b>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" color="medium">
-  <div id="container">
-    <app-table [entityName]="entityName" [id]="id" [name]="name"></app-table>
-  </div>
+  <app-table [entityName]="entityName" [id]="id" [name]="name"></app-table>
 </ion-content>

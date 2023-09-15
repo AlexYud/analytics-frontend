@@ -9,6 +9,7 @@ import { ModalController } from '@ionic/angular';
 export class EditModalComponent implements OnInit {
 
   public name!: string;
+  public newName: string = '';
 
   constructor(
     private modalCtrl: ModalController
@@ -16,14 +17,16 @@ export class EditModalComponent implements OnInit {
 
   ngOnInit() { }
 
+  handleInput(event: any) {
+    this.newName = event.target.value;
+  }
+
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
   }
 
   confirm() {
-    return this.modalCtrl.dismiss(this.name, 'confirm');
+    return this.modalCtrl.dismiss(this.newName, 'confirm');
   }
-
-
 
 }
