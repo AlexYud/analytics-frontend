@@ -11,6 +11,6 @@
 </ion-header>
 <ion-content class="ion-padding">
   <ion-item>
-    <ion-input labelPlacement="stacked" label="Name" [(ngModel)]="name" placeholder="Name"></ion-input>
+    <ion-input label="Name" labelPlacement="fixed" [placeholder]="name" (ionInput)="handleInput($event)"></ion-input>
   </ion-item>
 </ion-content>

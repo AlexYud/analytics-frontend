@@ -12,7 +12,7 @@ import { EditModalComponent } from '../edit-modal/edit-modal.component';
 })
 export class TableComponent implements OnInit {
   @Input('entityName') entityName: string = 'error';
-  @Input('id') id: number = -1;
+  @Input('id') id: any = -1;
   @Input('name') name: string = 'all';
   // public data: any[] = [
   //   {
@@ -73,7 +73,7 @@ export class TableComponent implements OnInit {
     }
   }
 
-  details(id: number, name: string, isService: boolean) {
+  details(id: any, name: string, isService: boolean) {
     this.apiService.isService = isService;
     if (this.id !== -1) {
       if (this.entityName === 'beacons') return console.log('end');
@@ -141,6 +141,7 @@ export class TableComponent implements OnInit {
   async openModal(name: string) {
     const modal = await this.modalCtrl.create({
       component: EditModalComponent,
+      cssClass: 'modal',
       componentProps: { name },
     });
     modal.present();

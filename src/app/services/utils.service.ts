@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 
 @Injectable({
@@ -7,10 +6,8 @@ import { LoadingController, ToastController } from '@ionic/angular';
 })
 export class UtilsService {
   private loading: any;
-  private historic: any[] = [];
 
   constructor(
-    public router: Router,
     private loadingCtrl: LoadingController,
     private toastCtrl: ToastController,
   ) { }
@@ -42,31 +39,5 @@ export class UtilsService {
 
   capitalizeFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
-  getHistoric() {
-    return this.historic;
-  }
-
-  setHistoric(newEntityName: any) {
-    this.historic.push(newEntityName);
-  }
-
-  resetHistoric() {
-    this.historic = [];
-  }
-
-  changeHistoric(url: string) {
-    let newHistoric: any[] = [];
-    for (let index = 0; index < this.historic.length; index++) {
-      const element = this.historic[index];
-      if (element.url === url) break 
-      newHistoric.push(element);
-    }
-    console.log('newHistoric: ', newHistoric);
-    this.historic = newHistoric;
-    // separar o ultimo
-    // chamar o ultimo pela rota
-    this.router.navigate([newHistoric[newHistoric.length - 1].url], { replaceUrl: true })
   }
 }
