@@ -9,6 +9,7 @@ import { FolderPageRoutingModule } from './folder-routing.module';
 import { FolderPage } from './folder.page';
 import { TableComponent } from '../components/table/table.component';
 import { EditModalComponent } from '../components/edit-modal/edit-modal.component';
+import { TableServicesComponent } from '../components/table-services/table-services.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { EditModalComponent } from '../components/edit-modal/edit-modal.componen
   declarations: [
     FolderPage,
     TableComponent,
+    TableServicesComponent,
     EditModalComponent,
   ]
 })

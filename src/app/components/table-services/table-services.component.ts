@@ -6,11 +6,11 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { EditModalComponent } from '../edit-modal/edit-modal.component';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss'],
+  selector: 'app-table-services',
+  templateUrl: './table-services.component.html',
+  styleUrls: ['./table-services.component.scss'],
 })
-export class TableComponent implements OnInit {
+export class TableServicesComponent implements OnInit {
   @Input('entityName') entityName: string = 'error';
   @Input('id') id: any = '-1';
   @Input('name') name: string = 'all';
@@ -39,7 +39,7 @@ export class TableComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.apiService.isService = false;
+    this.apiService.isService = true;
     this.get();
   }
 
@@ -53,6 +53,8 @@ export class TableComponent implements OnInit {
   get() {
     this.apiService.get(this.entityName, this.id).subscribe({
       next: (res) => {
+        console.log('res ', res);
+        
         this.data = res;
         this.results = [...this.data];
       },
@@ -78,7 +80,7 @@ export class TableComponent implements OnInit {
     this.apiService.isService = isService;
     if (this.id !== '-1') {
       if (this.entityName === 'beacons') return console.log('end');
-      if (isService) return this.router.navigate([`folder/beacons/${id}/${name}`]);
+      if (isService) return this.router.navigate([`folder/devices/${id}/${name}`]);
       this.router.navigate([`folder/${this.apiService.nextEntity(this.entityName)}/${id}/${name}`]);
     } else {
       this.router.navigate([`folder/${this.entityName}/${id}/${name}`]);
@@ -97,41 +99,17 @@ export class TableComponent implements OnInit {
   }
 
   async add() {
-    // Adding other entity
-    if (this.id !== '-1') {
-      const name: string = await this.openModal(`New ${this.apiService.nextEntity(this.entityName).slice(0, -1)}`);
-      if (name) {
-        // Create entity
-        this.apiService.add(this.apiService.nextEntity(this.entityName), name).subscribe({
-          next: (res) => {
-            console.log('table add api res: ', res);
-            // Link to parent
-            this.apiService.linkToParent(this.entityName, this.id, res.id).subscribe({
-              next: (res) => {
-                console.log('table linkToParent api res: ', res);
-                this.utilsService.showToast(`Item linked`, 'success', 'checkmark-circle')
-                this.data = res;
-                this.results = [...this.data];
-              },
-              error: (err) => this.utilsService.showToast(`Could not link to item`, 'danger', 'close-circle')
-            })
-          },
-          error: (err) => this.utilsService.showToast(`Could not add item`, 'danger', 'close-circle')
-        });
-      }
-    } else {
-      // Adding Merchant
-      const name: string = await this.openModal(`New ${this.entityName.slice(0, -1)}`);
-      if (name) {
-        this.apiService.add(this.entityName, name).subscribe({
-          next: (res) => {
-            console.log('table add api res: ', res);
-            this.utilsService.showToast(`Item added`, 'success', 'checkmark-circle')
-            this.get();
-          },
-          error: (err) => this.utilsService.showToast(`Could not add item`, 'danger', 'close-circle')
-        });
-      }
+    const name: string = await this.openModal(`New ${this.apiService.nextEntity(this.entityName).slice(0, -1)}`);
+    if (name) {
+      // Create entity
+      this.apiService.addService(this.id, name).subscribe({
+        next: (res) => {
+          console.log('table service add api res: ', res);
+          this.utilsService.showToast(`Item added`, 'success', 'checkmark-circle');
+          this.get();
+        },
+        error: (err) => this.utilsService.showToast(`Could not add item`, 'danger', 'close-circle')
+      });
     }
   }
 
