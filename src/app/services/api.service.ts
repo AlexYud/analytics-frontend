@@ -19,18 +19,20 @@ export class ApiService {
 
   add(entityName: string, name: string): Observable<any> {
     console.log(`adding: ${entityName}/`);
-    console.log({ publicIdentifier: name });
     
     if (entityName === 'beacons') return this.http.post<any>(`${this.url}${entityName}/`, { publicIdentifier: name });
-    if (this.isService) return this.http.post<any>(`${this.url}services/`, { name });
     return this.http.post<any>(`${this.url}${entityName}/`, { name });
   }
 
-  linkToParent(entityName: string, parentId: number, id: number): Observable<any> {
+  addService(beacon_id: string, name: string): Observable<any> {
+    return this.http.post<any>(`${this.url}beacons/${beacon_id}/services/`, { name });
+  }
+
+  linkToParent(entityName: string, parentId: number, id: string): Observable<any> {
     // if (entityName === 'beacons') return this.http.post<any>(`${this.url}${entityName}/`, { publicIdentifier: name });
     console.log(`linking: ${entityName}/${parentId}/${this.nextEntity(entityName)}`);
 
-    if (this.isService) return this.http.post<any>(`${this.url}beacons/${parentId}/services`, { service_id: id });
+    if (this.isService) return this.http.post<any>(`${this.url}beacons/${parentId}/services`, { service_id: id }); 
 
     switch (this.nextEntity(entityName)) {
       case 'facilities':
@@ -47,14 +49,14 @@ export class ApiService {
     }
   }
 
-  get(entityName: string, id: number): Observable<any> {
+  get(entityName: string, id: string): Observable<any> {
     if (this.isService) {
-      //console.log(`get: beacons/${id}/services`);
+      // console.log(`get: beacons/${id}/services`);
       return this.http.get<any>(`${this.url}beacons/${id}/services`);
     }
-    //console.log(`get: ${entityName}/${id}/${this.nextEntity(entityName)}`);
+    console.log(`get: ${entityName}/${id}/${this.nextEntity(entityName)}`);
 
-    if (id === -1) {
+    if (id === '-1') {
       // console.log(`getting: ${entityName}/`);
       return this.http.get<any>(`${this.url}${entityName}/`);
     };
@@ -68,7 +70,7 @@ export class ApiService {
     return this.http.post<any>(`${this.url}${entityName}/`, { name });
   }
 
-  delete(entityName: string, id: number): Observable<any> {
+  delete(entityName: string, id: string): Observable<any> {
     return this.http.delete<any>(`${this.url}${entityName}/${id}`);
   }
 }

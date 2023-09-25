@@ -10,7 +10,7 @@ import { ApiService } from '../services/api.service';
 })
 export class FolderPage implements OnInit {
   public entityName!: string;
-  public id!: number;
+  public id!: string;
   public name!: string;
   private activatedRoute = inject(ActivatedRoute);
 
@@ -21,7 +21,7 @@ export class FolderPage implements OnInit {
 
   ngOnInit() {
     this.entityName = this.activatedRoute.snapshot.paramMap.get('entityName') as string;
-    this.id = Number(this.activatedRoute.snapshot.paramMap.get('id') as string);
+    this.id = this.activatedRoute.snapshot.paramMap.get('id') as string;
     this.name = this.activatedRoute.snapshot.paramMap.get('name') as string;
   }
 }

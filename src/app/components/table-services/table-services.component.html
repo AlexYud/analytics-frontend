@@ -1,5 +1,5 @@
 <ion-grid>
-  <ion-row class="ion-justify-content-center ion-align-items-center ion-text-center">
+  <ion-row class="ion-justify-content-center ion-align-items-center">
     <ion-col size="9">
       <ion-searchbar class="ion-text-start" show-cancel-button="never" placeholder="Search by name or id" color="light"
         type="text" (ionInput)="searchbarInput($event)"></ion-searchbar>
@@ -20,15 +20,13 @@
       <ion-card class="ion-text-center ion-padding " color="light">
         <ion-grid class="ion-padding-bottom">
           <ion-row style="border-bottom: groove;">
-            <ion-col size="2.5" *ngIf="apiService.nextEntity(entityName) !== 'beacons'">
+            <ion-col size="2.5">
               <ion-title><b>ID</b></ion-title>
             </ion-col>
             <ion-col size="2.5">
               <ion-title>
                 <b>
-                  {{ utilsService.capitalizeFirstLetter(
-                  id === '-1' ? utilsService.capitalizeFirstLetter(entityName) : apiService.nextEntity(entityName)
-                  )}}
+                  Services
                 </b>
               </ion-title>
             </ion-col>
@@ -36,16 +34,6 @@
               <ion-title><b>Edit</b></ion-title>
             </ion-col>
             <ion-col>
-              <ion-title>
-                <b>
-                  {{ utilsService.capitalizeFirstLetter(
-                  id === '-1'? utilsService.capitalizeFirstLetter(apiService.nextEntity(entityName)) :
-                  apiService.nextEntity(apiService.nextEntity(entityName))
-                  )}}
-                </b>
-              </ion-title>
-            </ion-col>
-            <ion-col *ngIf="apiService.nextEntity(entityName) === 'beacons'">
               <ion-title><b>Services</b></ion-title>
             </ion-col>
             <ion-col>
@@ -60,7 +48,7 @@
             </ion-title>
           </ion-row>
           <ion-row style="border-bottom: groove;" *ngFor="let item of results" class="ion-align-items-center">
-            <ion-col size="2.5" *ngIf="apiService.nextEntity(entityName) !== 'beacons'">
+            <ion-col size="2.5">
               <ion-label>{{ item.id }}</ion-label>
             </ion-col>
             <ion-col size="2.5">
@@ -75,11 +63,6 @@
             <ion-col>
               <ion-button size="small" color="primary"
                 (click)="details(item.id, item.name ? item.name : item.publicIdentifier, false)">
-                <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
-              </ion-button>
-            </ion-col>
-            <ion-col *ngIf="apiService.nextEntity(entityName) === 'beacons'">
-              <ion-button size="small" color="primary" (click)="details(item.id, 'services', true)">
                 <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
               </ion-button>
             </ion-col>
