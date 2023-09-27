@@ -9,7 +9,7 @@ export class ApiService {
   public config: any = {
     server: {
       protocol: "http",
-      host: "ec2-18-231-172-16.sa-east-1.compute.amazonaws.com",
+      host: "ec2-18-229-255-40.sa-east-1.compute.amazonaws.com",
       port: "3000"
     },
     templates: [
