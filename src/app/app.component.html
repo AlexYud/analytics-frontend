@@ -1,13 +1,23 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
-      <ion-content >
+      <ion-content>
         <ion-list id="inbox-list">
           <ion-list-header>Indoor Analytics</ion-list-header>
-          <ion-note>v1</ion-note>
+          <!-- <ion-note>v1</ion-note> -->
 
+          <ion-list class="ion-margin-top">
+            <ion-select label="Select theme" label-placement="floating" fill="outline" interface="popover" (ionChange)="handleSelectChange($event)">
+              <ion-select-option *ngFor="let template of templates;" value="Restaurant">{{ template.name }}</ion-select-option>
+            </ion-select>
+          </ion-list>
+
+        </ion-list>
+
+        <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+              routerLinkActive="selected">
               <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + ''"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>

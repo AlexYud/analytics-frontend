@@ -10,6 +10,8 @@ import { FolderPage } from './folder.page';
 import { TableComponent } from '../components/table/table.component';
 import { EditModalComponent } from '../components/edit-modal/edit-modal.component';
 import { TableServicesComponent } from '../components/table-services/table-services.component';
+import { ChartComponent } from '../components/chart/chart.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
@@ -17,12 +19,14 @@ import { TableServicesComponent } from '../components/table-services/table-servi
     FormsModule,
     IonicModule,
     FolderPageRoutingModule,
+    NgChartsModule,
   ],
   declarations: [
     FolderPage,
     TableComponent,
     TableServicesComponent,
     EditModalComponent,
+    ChartComponent
   ]
 })
 export class FolderPageModule {}

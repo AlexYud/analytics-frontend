@@ -31,6 +31,37 @@ export class TableComponent implements OnInit {
   public data: any[] = [];
   public results = [...this.data];
 
+  public connectedUserData: number[] = [];
+
+  public dataChart = {
+    labels: [
+      'Environment',
+    ],
+    datasets: [{
+      label: 'Connected Users',
+      data: this.connectedUserData,
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 205, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(201, 203, 207, 0.2)'
+      ],
+      borderColor: [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+        'rgb(153, 102, 255)',
+        'rgb(201, 203, 207)'
+      ],
+      borderWidth: 1
+    }]
+  }
+
   constructor(
     private modalCtrl: ModalController,
     private router: Router,
@@ -55,9 +86,34 @@ export class TableComponent implements OnInit {
       next: (res) => {
         this.data = res;
         this.results = [...this.data];
+        if (this.entityName === "environments") this.chartData(res);
       },
       error: (err) => this.utilsService.showToast('Could not get items', 'danger', 'close-circle')
     })
+  }
+
+  chartData(data: any[]) {
+    console.log(data);
+    
+    this.calcEnvUsers(data);
+    for (let index = 0; index < data.length; index++) {
+      const element = data[index];
+      this.dataChart.labels.push(element.id.slice(-10))
+      const connectedUsers: number = element.connectedUsers;
+      this.dataChart.datasets[0].data.push(connectedUsers)
+    }
+  }
+
+  calcEnvUsers(data: any[]) {
+    const envConnectedUsers = new Set();
+    for (let index = 0; index < data.length; index++) {
+      const beacon = data[index];
+      for (let index = 0; index < beacon.devices.length; index++) {
+        const device = beacon.devices[index];
+        envConnectedUsers.add(device.id);
+      }
+    }
+    this.dataChart.datasets[0].data.push(envConnectedUsers.size);
   }
 
   async edit(obj: any) {
@@ -136,7 +192,8 @@ export class TableComponent implements OnInit {
   }
 
   refresh() {
-    this.get();
+    // this.get();
+    window.location.reload();
   }
 
   async openModal(name: string) {

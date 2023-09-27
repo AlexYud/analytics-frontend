@@ -14,10 +14,6 @@ const routes: Routes = [
   {
     path: 'folder/:entityName/:id/:name',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  },
-  {
-    path: 'details/:id',
-    loadChildren: () => import('./pages/details/details.module').then( m => m.DetailsPageModule)
   }
 ];
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -15,5 +16,17 @@ export class AppComponent {
     // { title: 'Devices', url: '/folder/devices', icon: 'phone-portrait' },
     // { title: 'Services', url: '/folder/services', icon: 'construct' },
   ]
-  constructor() { }
+  public templates: any[] = []
+  constructor(
+    private apiService: ApiService,
+  ) { }
+
+  ngOnInit() {
+    setTimeout(() => this.templates = this.apiService.config.templates, 500);
+  }
+
+  handleSelectChange(event: any) {
+    // console.log(event.target.value);
+    this.apiService.executeThemeScript(event.target.value);
+  }
 }

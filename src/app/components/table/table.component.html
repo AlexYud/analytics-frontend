@@ -1,4 +1,12 @@
-<ion-grid>
+<ion-grid class="ion-margin-top">
+  <ion-row *ngIf="entityName === 'environments'"
+    class="ion-justify-content-center ion-align-items-center ion-text-center">
+    <ion-col size="11">
+      <ion-card class="ion-padding" >
+        <app-chart [data]="dataChart"></app-chart>
+      </ion-card>
+    </ion-col>
+  </ion-row>
   <ion-row class="ion-justify-content-center ion-align-items-center ion-text-center">
     <ion-col size="9">
       <ion-searchbar class="ion-text-start" show-cancel-button="never" placeholder="Search by name or id" color="light"
@@ -73,13 +81,13 @@
               </ion-button>
             </ion-col>
             <ion-col>
-              <ion-button size="small" color="primary"
+              <ion-button [disabled]="apiService.nextEntity(entityName) === 'beacons'" size="small" color="primary"
                 (click)="details(item.id, item.name ? item.name : item.publicIdentifier, false)">
                 <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
               </ion-button>
             </ion-col>
             <ion-col *ngIf="apiService.nextEntity(entityName) === 'beacons'">
-              <ion-button size="small" color="primary" (click)="details(item.id, 'services', true)">
+              <ion-button disabled size="small" color="primary" (click)="details(item.id, 'services', true)">
                 <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
               </ion-button>
             </ion-col>
