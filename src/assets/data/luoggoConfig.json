@@ -1,0 +1,117 @@
+{
+  "server": {
+    "protocol": "http",
+    "host": "ec2-18-231-172-16.sa-east-1.compute.amazonaws.com",
+    "port": "3000"
+  },
+  "templates": [
+    {
+      "name": "Museum",
+      "merchants": [
+        {
+          "name": "Chicken fil A",
+          "facilities": [
+            {
+              "name": "Kissimmee",
+              "environments": [
+                {
+                  "name": "Main Store - Ground Floor",
+                  "url": "https://www.example.com",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
+                      "url": "https://www.example.com",
+                      "distance": 0.3
+                    },
+                    {
+                      "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
+                      "url": "https://www.example.com",
+                      "distance": 0.3
+                    },
+                    {
+                      "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
+                      "url": "https://www.example.com",
+                      "distance": 0.3
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Restaurant",
+      "merchants": [
+        {
+          "name": "Chicken fil A",
+          "facilities": [
+            {
+              "name": "Kissimmee",
+              "environments": [
+                {
+                  "name": "Main Store - Ground Floor",
+                  "url": "https://www.example.com",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
+                      "url": "https://www.example.com",
+                      "distance": 0.3
+                    },
+                    {
+                      "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
+                      "url": "https://www.example.com",
+                      "distance": 0.3
+                    },
+                    {
+                      "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
+                      "url": "https://www.example.com",
+                      "distance": 0.3
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Apple Store",
+      "merchants": [
+        {
+          "name": "Chicken fil A",
+          "facilities": [
+            {
+              "name": "Kissimmee",
+              "environments": [
+                {
+                  "name": "Main Store - Ground Floor",
+                  "url": "https://www.example.com",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
+                      "url": "https://www.example.com",
+                      "distance": 0.3
+                    },
+                    {
+                      "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
+                      "url": "https://www.example.com",
+                      "distance": 0.3
+                    },
+                    {
+                      "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
+                      "url": "https://www.example.com",
+                      "distance": 0.3
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

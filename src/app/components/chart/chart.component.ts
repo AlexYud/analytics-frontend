@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import Chart, { ChartTypeRegistry } from 'chart.js/auto';
 import { ChartService } from 'src/app/services/chart.service';
 
@@ -8,23 +8,17 @@ import { ChartService } from 'src/app/services/chart.service';
   styleUrls: ['./chart.component.scss'],
 })
 export class ChartComponent implements OnInit {
-  @Input() data: any = {
+  @Input('data') data: any = {
     labels: [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
+      'Environment',
+      'beacon1',
+      'beacon2',
+      'beacon3',
+      'beacon4',
+      'beacon5',
+      'beacon6',
     ],
     datasets: [{
-      label: 'My First Dataset',
       data: [65, 59, 80, 81, 56, 55, 40],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -49,12 +43,28 @@ export class ChartComponent implements OnInit {
   };
   @Input() type: keyof ChartTypeRegistry = 'bar';
   @Input() options: any = {
+    indexAxis: 'y',
     responsive: true,
     scales: {
       y: {
-        beginAtZero: true
+        beginAtZero: true,
+        ticks: {
+
+          font: {
+            size: 18,
+          }
+        },
+      },
+      x: {
+        beginAtZero: true,
+        ticks: {
+          stepSize: 1,
+          font: {
+            size: 18,
+          }
+        },
       }
-    }
+    },
   };
   public canvasId: string = this.chartService.getChartId();
 
@@ -63,7 +73,8 @@ export class ChartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    document.getElementsByTagName("canvas")[Number(this.canvasId)].setAttribute("id", this.canvasId);
+    // document.getElementsByTagName("canvas")[Number(this.canvasId)].setAttribute("id", this.canvasId);
+    document.getElementsByTagName("canvas")[0].setAttribute("id", this.canvasId);
 
     new Chart(
       document.getElementById(this.canvasId) as HTMLCanvasElement,
@@ -73,6 +84,10 @@ export class ChartComponent implements OnInit {
         options: this.options
       }
     );
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.data = changes['data'].currentValue;
   }
 
 }

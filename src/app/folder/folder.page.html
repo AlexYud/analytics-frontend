@@ -15,6 +15,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" color="medium">
+
   <app-table *ngIf="entityName !== 'beacons'" [entityName]="entityName" [id]="id" [name]="name"></app-table>
-  <app-table-services *ngIf="entityName === 'beacons'" [entityName]="entityName" [id]="id" [name]="name"></app-table-services>
+  <app-table-services *ngIf="entityName === 'beacons'" [entityName]="entityName" [id]="id"
+    [name]="name"></app-table-services>
+
 </ion-content>
