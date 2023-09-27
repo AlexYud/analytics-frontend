@@ -120,6 +120,8 @@ export class ApiService {
   }
 
   executeThemeScript(theme: string) {
+    console.log("theme: ", theme);
+    
     this.http.delete<any>(`${this.url}devices/`).subscribe({
       next: (res) => this.http.delete<any>(`${this.url}beacons/`).subscribe({
         next: (res) => this.http.delete<any>(`${this.url}environments/`).subscribe({
