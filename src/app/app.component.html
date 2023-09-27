@@ -8,7 +8,7 @@
 
           <ion-list class="ion-margin-top">
             <ion-select label="Select theme" label-placement="floating" fill="outline" interface="popover" (ionChange)="handleSelectChange($event)">
-              <ion-select-option *ngFor="let template of templates;" value="Restaurant">{{ template.name }}</ion-select-option>
+              <ion-select-option *ngFor="let template of templates;" value="template.name">{{ template.name }}</ion-select-option>
             </ion-select>
           </ion-list>
 
