@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'folder/:entityName/:id/:name',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+  },  {
+    path: 'analytics',
+    loadChildren: () => import('./pages/analytics/analytics.module').then( m => m.AnalyticsPageModule)
   }
+
 ];
 
 @NgModule({

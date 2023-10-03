@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import Chart, { ChartTypeRegistry } from 'chart.js/auto';
 import { ChartService } from 'src/app/services/chart.service';
 
@@ -8,75 +8,19 @@ import { ChartService } from 'src/app/services/chart.service';
   styleUrls: ['./chart.component.scss'],
 })
 export class ChartComponent implements OnInit {
-  @Input('data') data: any = {
-    labels: [
-      'Environment',
-      'beacon1',
-      'beacon2',
-      'beacon3',
-      'beacon4',
-      'beacon5',
-      'beacon6',
-    ],
-    datasets: [{
-      data: [65, 59, 80, 81, 56, 55, 40],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(255, 205, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(201, 203, 207, 0.2)'
-      ],
-      borderColor: [
-        'rgb(255, 99, 132)',
-        'rgb(255, 159, 64)',
-        'rgb(255, 205, 86)',
-        'rgb(75, 192, 192)',
-        'rgb(54, 162, 235)',
-        'rgb(153, 102, 255)',
-        'rgb(201, 203, 207)'
-      ],
-      borderWidth: 1
-    }]
-  };
-  @Input() type: keyof ChartTypeRegistry = 'bar';
-  @Input() options: any = {
-    indexAxis: 'y',
-    responsive: true,
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-
-          font: {
-            size: 18,
-          }
-        },
-      },
-      x: {
-        beginAtZero: true,
-        ticks: {
-          stepSize: 1,
-          font: {
-            size: 18,
-          }
-        },
-      }
-    },
-  };
+  @Input() data: any;
+  @Input('type') type: keyof ChartTypeRegistry = 'bar';
+  @Input('options') options: any;
   public canvasId: string = this.chartService.getChartId();
-
   constructor(
     public chartService: ChartService,
   ) { }
 
   ngOnInit() {
-    // document.getElementsByTagName("canvas")[Number(this.canvasId)].setAttribute("id", this.canvasId);
-    document.getElementsByTagName("canvas")[0].setAttribute("id", this.canvasId);
+    document.getElementsByTagName("canvas")[Number(this.canvasId)].setAttribute("id", this.canvasId);
+    // document.getElementsByTagName("canvas")[0].setAttribute("id", this.canvasId);
 
-    new Chart(
+    var chart = new Chart(
       document.getElementById(this.canvasId) as HTMLCanvasElement,
       {
         type: this.type,
@@ -84,10 +28,13 @@ export class ChartComponent implements OnInit {
         options: this.options
       }
     );
-  }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.data = changes['data'].currentValue;
+    this.chartService.getDataChart().subscribe(data => {
+      setTimeout(() => {
+        chart.data = data;
+        chart.update();
+      }, 100);
+    })
   }
 
 }

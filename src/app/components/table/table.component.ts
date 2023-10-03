@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { ApiService } from 'src/app/services/api.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { EditModalComponent } from '../edit-modal/edit-modal.component';
+import { ChartService } from 'src/app/services/chart.service';
 
 @Component({
   selector: 'app-table',
@@ -62,10 +63,36 @@ export class TableComponent implements OnInit {
     }]
   }
 
+  public optionsChart = {
+    indexAxis: 'y',
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          font: {
+            size: 18,
+          }
+        },
+      },
+      x: {
+        beginAtZero: true,
+        suggestedMax: 5,
+        ticks: {
+          stepSize: 1,
+          font: {
+            size: 18,
+          }
+        },
+      }
+    },
+  };
+
   constructor(
     private modalCtrl: ModalController,
     private router: Router,
     public apiService: ApiService,
+    public chartService: ChartService,
     public utilsService: UtilsService,
   ) { }
 
@@ -82,19 +109,37 @@ export class TableComponent implements OnInit {
   }
 
   get() {
-    this.apiService.get(this.entityName, this.id).subscribe({
-      next: (res) => {
-        this.data = res;
-        this.results = [...this.data];
-        if (this.entityName === "environments") this.chartData(res);
+    const res = [
+      {
+        id: 'test1',
+        devices: [{id: 'device1'}],
+        connectedUsers: Math.floor(Math.random() * 5),
       },
-      error: (err) => this.utilsService.showToast('Could not get items', 'danger', 'close-circle')
-    })
+      {
+        id: 'test2',
+        devices: [{id: 'device1'}],
+        connectedUsers: Math.floor(Math.random() * 5),
+      },
+      {
+        id: 'test3',
+        devices: [{id: 'device1'}],
+        connectedUsers: Math.floor(Math.random() * 5),
+      }
+    ]
+    this.chartData(res)
+    // this.apiService.get(this.entityName, this.id).subscribe({
+    //   next: (res) => {
+    //     this.data = res;
+    //     this.results = [...this.data];
+    //     if (this.entityName === "environments") this.chartData(res);
+    //   },
+    //   error: (err) => this.utilsService.showToast('Could not get items', 'danger', 'close-circle')
+    // })
   }
 
   chartData(data: any[]) {
-    console.log(data);
-    
+    this.dataChart.labels = ['Environment'];
+    this.dataChart.datasets[0].data = [];
     this.calcEnvUsers(data);
     for (let index = 0; index < data.length; index++) {
       const element = data[index];
@@ -114,6 +159,7 @@ export class TableComponent implements OnInit {
       }
     }
     this.dataChart.datasets[0].data.push(envConnectedUsers.size);
+    this.chartService.setDataChart(this.dataChart);
   }
 
   async edit(obj: any) {
@@ -192,8 +238,8 @@ export class TableComponent implements OnInit {
   }
 
   refresh() {
-    // this.get();
-    window.location.reload();
+    this.get();
+    // window.location.reload();
   }
 
   async openModal(name: string) {
