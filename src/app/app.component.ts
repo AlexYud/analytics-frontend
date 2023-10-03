@@ -15,6 +15,7 @@ export class AppComponent {
     // { title: 'Beacons', url: '/folder/beacons', icon: 'radio' },
     // { title: 'Devices', url: '/folder/devices', icon: 'phone-portrait' },
     // { title: 'Services', url: '/folder/services', icon: 'construct' },
+    // { title: 'Analytics', url: '/analytics', icon: 'bar-chart' },
   ]
   public templates: any[] = []
   constructor(

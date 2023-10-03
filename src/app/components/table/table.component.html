@@ -1,12 +1,20 @@
 <ion-grid class="ion-margin-top">
-  <ion-row *ngIf="entityName === 'environments'"
+  <!-- <ion-row *ngIf="entityName === 'environments'"
     class="ion-justify-content-center ion-align-items-center ion-text-center">
     <ion-col size="11">
       <ion-card class="ion-padding" >
         <app-chart [data]="dataChart"></app-chart>
       </ion-card>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
+  <ion-row 
+  class="ion-justify-content-center ion-align-items-center ion-text-center">
+  <ion-col size="11">
+    <ion-card class="ion-padding" >
+      <app-chart [data]="dataChart" [options]="optionsChart"></app-chart>
+    </ion-card>
+  </ion-col>
+</ion-row>
   <ion-row class="ion-justify-content-center ion-align-items-center ion-text-center">
     <ion-col size="9">
       <ion-searchbar class="ion-text-start" show-cancel-button="never" placeholder="Search by name or id" color="light"
