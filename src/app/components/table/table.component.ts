@@ -34,6 +34,8 @@ export class TableComponent implements OnInit {
 
   public connectedUserData: number[] = [];
 
+  public dataChartError: boolean = false;
+
   public dataChart = {
     labels: [
       'Environment',
@@ -109,31 +111,37 @@ export class TableComponent implements OnInit {
   }
 
   get() {
-    const res = [
-      {
-        id: 'test1',
-        devices: [{id: 'device1'}],
-        connectedUsers: Math.floor(Math.random() * 5),
-      },
-      {
-        id: 'test2',
-        devices: [{id: 'device1'}],
-        connectedUsers: Math.floor(Math.random() * 5),
-      },
-      {
-        id: 'test3',
-        devices: [{id: 'device1'}],
-        connectedUsers: Math.floor(Math.random() * 5),
-      }
-    ]
-    this.chartData(res)
+    setTimeout(() => {
+      const res = [
+        {
+          id: 'test1',
+          devices: [{ id: 'device1' }],
+          connectedUsers: Math.floor(Math.random() * 5),
+        },
+        {
+          id: 'test2',
+          devices: [{ id: 'device1' }],
+          connectedUsers: Math.floor(Math.random() * 5),
+        },
+        {
+          id: 'test3',
+          devices: [{ id: 'device1' }],
+          connectedUsers: Math.floor(Math.random() * 5),
+        }
+      ]
+      this.chartData(res)
+    }, 2000)
+
     // this.apiService.get(this.entityName, this.id).subscribe({
     //   next: (res) => {
     //     this.data = res;
     //     this.results = [...this.data];
     //     if (this.entityName === "environments") this.chartData(res);
     //   },
-    //   error: (err) => this.utilsService.showToast('Could not get items', 'danger', 'close-circle')
+    //   error: (err) => {
+    //     this.utilsService.showToast('Could not get items', 'danger', 'close-circle');
+    //     this.dataChartError = true;
+    //   }
     // })
   }
 

@@ -9,12 +9,12 @@ export class ApiService {
   public config: any = {
     server: {
       protocol: "http",
-      host: "ec2-18-229-255-40.sa-east-1.compute.amazonaws.com",
+      host: "ec2-54-94-35-89.sa-east-1.compute.amazonaws.com",
       port: "3000"
     },
     templates: [
       {
-        name: "Museum",
+        name: "Test",
         merchants: [
           {
             name: "Chicken fil A",
@@ -49,7 +49,6 @@ export class ApiService {
   constructor(
     private http: HttpClient,
   ) {
-
     this.http.get('../../assets/data/luoggoConfig.json').subscribe({
       next: (res) => this.config = res,
       error: (error) => console.log(error)
@@ -74,7 +73,6 @@ export class ApiService {
   }
 
   linkToParent(entityName: string, parentId: number, id: string): Observable<any> {
-    // if (entityName === 'beacons') return this.http.post<any>(`${this.url}${entityName}/`, { publicIdentifier: name });
     console.log(`linking: ${entityName}/${parentId}/${this.nextEntity(entityName)}`);
 
     if (this.isService) return this.http.post<any>(`${this.url}beacons/${parentId}/services`, { service_id: id });
@@ -121,7 +119,7 @@ export class ApiService {
 
   executeThemeScript(theme: string) {
     console.log("theme: ", theme);
-    
+
     this.http.delete<any>(`${this.url}devices/`).subscribe({
       next: (res) => this.http.delete<any>(`${this.url}beacons/`).subscribe({
         next: (res) => this.http.delete<any>(`${this.url}environments/`).subscribe({
