@@ -1,58 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  public config: any = {
-    server: {
-      protocol: "http",
-      host: "ec2-54-94-35-89.sa-east-1.compute.amazonaws.com",
-      port: "3000"
-    },
-    templates: [
-      {
-        name: "Test",
-        merchants: [
-          {
-            name: "Chicken fil A",
-            facilities: [
-              {
-                name: "Kissimmee",
-                environments: [
-                  {
-                    name: "Main Store - Ground Floor",
-                    url: 'https://www.google.com',
-                    beacons: [
-                      { publicIdentifier: "3cc9ea23bb44f5b16db4add2ace1a821", url: "https://www.example.com", distance: 0.3 },
-                      { publicIdentifier: "bed3d713a50d60a0ae2101bf70538e1e", url: "https://www.example.com", distance: 0.3 },
-                      { publicIdentifier: "a5a1aa06f8d989cad3b225bef2e7a12a", url: "https://www.example.com", distance: 0.3 },
-                      { publicIdentifier: "6b7bd82aaeec42b25c7d56a166b3cf1b", url: "https://www.example.com", distance: 0.3 },
-                      { publicIdentifier: "a861d13f23b24a473c4a8e025c4a4639", url: "https://www.example.com", distance: 0.3 },
-                      { publicIdentifier: "7d271f9816b38ccdc02c1c406cc65732", url: "https://www.example.com", distance: 0.3 },
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-  public url: string = `${this.config.server.protocol}://${this.config.server.host}:${this.config.server.port}/`;
+  public config: any;
+  public url: string = "";
   public entities: string[] = ['merchants', 'facilities', 'environments', 'beacons', 'devices', 'services']
   public isService: boolean = false;
+  public templateChanged: Subject<any> = new Subject<any>();
 
   constructor(
     private http: HttpClient,
   ) {
     this.http.get('../../assets/data/luoggoConfig.json').subscribe({
-      next: (res) => this.config = res,
+      next: (res: any) => {
+        this.config = res;
+        this.url = `${res.server.protocol}://${res.server.host}:${res.server.port}/`;
+      },
       error: (error) => console.log(error)
     });
+  }
+
+  setTemplateChanged() {
+    this.templateChanged.next(true);
+  }
+
+  getTemplateChanged() {
+    return this.templateChanged.asObservable();
   }
 
   nextEntity(entityName: string) {
@@ -60,10 +37,10 @@ export class ApiService {
     return this.entities[index + 1];
   }
 
-  add(entityName: string, name: string, url?: string, distance?: number): Observable<any> {
+  add(entityName: string, name: string, url?: string, distance?: number, priority?: number): Observable<any> {
     console.log(`adding: ${entityName}/`);
 
-    if (entityName === 'beacons') return this.http.post<any>(`${this.url}${entityName}/`, { publicIdentifier: name, url, distance });
+    if (entityName === 'beacons') return this.http.post<any>(`${this.url}${entityName}/`, { publicIdentifier: name, url, distance, priority });
     if (entityName === 'environments') return this.http.post<any>(`${this.url}${entityName}/`, { name, url });
     return this.http.post<any>(`${this.url}${entityName}/`, { name });
   }
@@ -196,8 +173,10 @@ export class ApiService {
     for (let index = 0; index < beacons.length; index++) {
       const beacon = beacons[index];
       console.log('beacon: ', beacon);
-      this.add('beacons', beacon.publicIdentifier, beacon.url, beacon.distance).subscribe({
+      this.add('beacons', beacon.publicIdentifier, beacon.url, beacon.distance, beacon.priority).subscribe({
         next: (res) => {
+          console.log("addBeacons res form server: ", res);
+          
           this.linkToParent('environments', parentId, res.id).subscribe({
             next: (res) => console.log(res),
             error: (error) => console.log(error)

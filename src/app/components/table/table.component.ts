@@ -101,6 +101,9 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.apiService.isService = false;
     this.get();
+    if (this.apiService.nextEntity(this.entityName) === 'beacons') setInterval(() => {
+      this.get();
+    }, 1000);
   }
 
   searchbarInput(event: any) {
@@ -111,38 +114,41 @@ export class TableComponent implements OnInit {
   }
 
   get() {
-    setTimeout(() => {
-      const res = [
-        {
-          id: 'test1',
-          devices: [{ id: 'device1' }],
-          connectedUsers: Math.floor(Math.random() * 5),
-        },
-        {
-          id: 'test2',
-          devices: [{ id: 'device1' }],
-          connectedUsers: Math.floor(Math.random() * 5),
-        },
-        {
-          id: 'test3',
-          devices: [{ id: 'device1' }],
-          connectedUsers: Math.floor(Math.random() * 5),
-        }
-      ]
-      this.chartData(res)
-    }, 2000)
+    // setTimeout(() => {
+    //   const res = [
+    //     {
+    //       id: 'test1',
+    //       devices: [{ id: 'device1' }],
+    //       connectedUsers: Math.floor(Math.random() * 5),
+    //     },
+    //     {
+    //       id: 'test2',
+    //       devices: [{ id: 'device1' }],
+    //       connectedUsers: Math.floor(Math.random() * 5),
+    //     },
+    //     {
+    //       id: 'test3',
+    //       devices: [{ id: 'device1' }],
+    //       connectedUsers: Math.floor(Math.random() * 5),
+    //     }
+    //   ]
+    //   this.chartData(res)
+    // }, 2000)
 
-    // this.apiService.get(this.entityName, this.id).subscribe({
-    //   next: (res) => {
-    //     this.data = res;
-    //     this.results = [...this.data];
-    //     if (this.entityName === "environments") this.chartData(res);
-    //   },
-    //   error: (err) => {
-    //     this.utilsService.showToast('Could not get items', 'danger', 'close-circle');
-    //     this.dataChartError = true;
-    //   }
-    // })
+    this.apiService.get(this.entityName, this.id).subscribe({
+      next: (res) => {
+        console.log("get res: ", res);
+        this.data = res;
+        this.results = [...this.data];
+        if (this.entityName === "environments") this.chartData(res);
+      },
+      error: (err) => {
+        this.data = [];
+        this.results = [...this.data];
+        this.utilsService.showToast('Could not get items', 'danger', 'close-circle');
+        this.dataChartError = true;
+      }
+    })
   }
 
   chartData(data: any[]) {

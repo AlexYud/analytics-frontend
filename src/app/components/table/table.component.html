@@ -1,5 +1,6 @@
 <ion-grid class="ion-margin-top">
-  <ion-row class="ion-justify-content-center ion-align-items-center ion-text-center">
+  <ion-row *ngIf="apiService.nextEntity(entityName) === 'beacons'"
+    class="ion-justify-content-center ion-align-items-center ion-text-center">
     <ion-col size="11">
       <ion-card class="ion-padding">
         <app-chart *ngIf="dataChart.labels.length > 1" [data]="dataChart" [options]="optionsChart"></app-chart>
@@ -8,7 +9,7 @@
             class="ion-padding ion-margin"></ion-spinner>
           <div *ngIf="dataChartError">
             <ion-grid style="height: auto;">
-              <ion-row >
+              <ion-row>
                 <ion-col>
                   <img src="../../../assets/chartError.svg" alt="home">
                 </ion-col>
