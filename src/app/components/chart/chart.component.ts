@@ -31,6 +31,8 @@ export class ChartComponent implements OnInit {
       
     this.chartService.getDataChart().subscribe(data => {
       setTimeout(() => {
+        // console.log(data);
+        
         chart.data = data;
         chart.update();
       }, 100);

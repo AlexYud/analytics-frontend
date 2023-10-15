@@ -173,6 +173,7 @@ export class TableComponent implements OnInit {
       }
     }
     this.dataChart.datasets[0].data.push(envConnectedUsers.size);
+    
     this.chartService.setDataChart(this.dataChart);
   }
 
