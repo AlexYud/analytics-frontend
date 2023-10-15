@@ -5,8 +5,11 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "npm run clean && npm run registry && npm install && npm run build --prod && npm run serve",
+	"clean": "npm cache clean --force",
+	"registry": "npm config set registry https://registry.npmjs.org/",
+    "serve": "ng serve --host=0.0.0.0 --port=8080",
+	"build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
@@ -42,7 +45,6 @@
     "@angular-eslint/eslint-plugin-template": "^16.0.0",
     "@angular-eslint/schematics": "^16.0.0",
     "@angular-eslint/template-parser": "^16.0.0",
-    "@angular/cli": "^16.0.0",
     "@angular/compiler": "^16.0.0",
     "@angular/compiler-cli": "^16.0.0",
     "@angular/language-service": "^16.0.0",
