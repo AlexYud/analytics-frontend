@@ -25,7 +25,7 @@ export class AppComponent {
   ) { }
 
   ngOnInit() {
-    setTimeout(() => this.templates = this.apiService.config.templates, 500);
+    setTimeout(() => this.templates = this.apiService.config.templates, 1000);
     this.apiService.getTemplateChanged().subscribe(async res => {
       await this.router.navigate(['/folder/merchants/-1/all']);
     });

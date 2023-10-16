@@ -78,6 +78,7 @@ export class TableComponent implements OnInit {
   };
 
   private interval: any;
+  private observable: any;
 
   constructor(
     private modalCtrl: ModalController,
@@ -93,13 +94,14 @@ export class TableComponent implements OnInit {
     if (this.apiService.nextEntity(this.entityName) === 'beacons') this.interval = setInterval(() => {
       this.get();
     }, 1000);
-    this.apiService.getTemplateChanged().subscribe(async res => {
-     setTimeout(() => this.get(), 1000)
+    this.observable = this.apiService.getTemplateChanged().subscribe(async res => {
+     setTimeout(() => this.get(), 2000)
     });
   }
 
   ngOnDestroy() {
     clearInterval(this.interval);
+    this.observable = undefined;
   }
 
   searchbarInput(event: any) {
