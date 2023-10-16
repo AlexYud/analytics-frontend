@@ -95,10 +95,8 @@ export class TableComponent implements OnInit {
       this.get();
     }, 1000);
     this.observable = this.apiService.getTemplateChanged().subscribe(async res => {
-      this.utilsService.showLoading();
       setTimeout(() => {
         this.get();
-        this.utilsService.dismissLoading();
       }, 4000)
     });
   }
