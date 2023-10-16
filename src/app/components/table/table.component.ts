@@ -94,8 +94,10 @@ export class TableComponent implements OnInit {
     if (this.apiService.nextEntity(this.entityName) === 'beacons') this.interval = setInterval(() => {
       this.get();
     }, 1000);
-    this.observable = this.apiService.getTemplateChanged().subscribe(async res => {
+    this.observable = this.apiService.getTemplateChanged().subscribe(res => {
+      this.utilsService.showLoading();
       setTimeout(() => {
+        this.utilsService.dismissLoading();
         this.get();
       }, 4000)
     });
@@ -103,7 +105,7 @@ export class TableComponent implements OnInit {
 
   ngOnDestroy() {
     clearInterval(this.interval);
-    this.observable = undefined;
+    this.observable.unsubscribe();
   }
 
   searchbarInput(event: any) {
