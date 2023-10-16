@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from './services/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -19,15 +20,20 @@ export class AppComponent {
   ]
   public templates: any[] = []
   constructor(
+    private router: Router,
     private apiService: ApiService,
   ) { }
 
   ngOnInit() {
     setTimeout(() => this.templates = this.apiService.config.templates, 500);
+    this.apiService.getTemplateChanged().subscribe(async res => {
+      await this.router.navigate(['/folder/merchants/-1/all']);
+    });
   }
 
   handleSelectChange(event: any) {
     // console.log(event.target.value);
+    this.apiService.setTemplateChanged();
     this.apiService.executeThemeScript(event.target.value);
   }
 }

@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { EditModalComponent } from '../edit-modal/edit-modal.component';
 import { ChartService } from 'src/app/services/chart.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -15,20 +16,6 @@ export class TableComponent implements OnInit {
   @Input('entityName') entityName: string = 'error';
   @Input('id') id: any = '-1';
   @Input('name') name: string = 'all';
-  // public data: any[] = [
-  //   {
-  //     id: 0,
-  //     name: 'test'
-  //   },
-  //   {
-  //     id: 1,
-  //     name: 'test1'
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'test2'
-  //   },
-  // ];
   public data: any[] = [];
   public results = [...this.data];
 
@@ -90,6 +77,8 @@ export class TableComponent implements OnInit {
     },
   };
 
+  private interval: any;
+
   constructor(
     private modalCtrl: ModalController,
     private router: Router,
@@ -101,9 +90,16 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.apiService.isService = false;
     this.get();
-    if (this.apiService.nextEntity(this.entityName) === 'beacons') setInterval(() => {
+    if (this.apiService.nextEntity(this.entityName) === 'beacons') this.interval = setInterval(() => {
       this.get();
     }, 1000);
+    this.apiService.getTemplateChanged().subscribe(async res => {
+     setTimeout(() => this.get(), 1000)
+    });
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.interval);
   }
 
   searchbarInput(event: any) {
@@ -173,7 +169,7 @@ export class TableComponent implements OnInit {
       }
     }
     this.dataChart.datasets[0].data.push(envConnectedUsers.size);
-    
+
     this.chartService.setDataChart(this.dataChart);
   }
 

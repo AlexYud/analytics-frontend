@@ -3,12 +3,15 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>Luoggo Analytics</ion-list-header>
+          <img src="../assets/LUOGGO_ Red No Text Transparent.png" alt="Luoggo Icon">
+          <ion-list-header><ion-text color="luoggo">Analytics</ion-text></ion-list-header>
           <!-- <ion-note>v1</ion-note> -->
 
           <ion-list class="ion-margin-top">
-            <ion-select label="Select theme" label-placement="floating" fill="outline" interface="popover" (ionChange)="handleSelectChange($event)">
-              <ion-select-option *ngFor="let template of templates;" value="{{ template.name }}">{{ template.name }}</ion-select-option>
+            <ion-select label="Select theme" label-placement="floating" fill="outline" interface="popover"
+              (ionChange)="handleSelectChange($event)">
+              <ion-select-option *ngFor="let template of templates;" value="{{ template.name }}">{{ template.name
+                }}</ion-select-option>
             </ion-select>
           </ion-list>
 
