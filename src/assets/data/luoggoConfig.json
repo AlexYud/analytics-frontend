@@ -1,8 +1,8 @@
 {
   "server": {
     "protocol": "http",
-    "host": "backend.digisignservices.com",
-    "port": "80"
+    "host": "localhost",
+    "port": "4000"
   },
   "templates": [
     {
