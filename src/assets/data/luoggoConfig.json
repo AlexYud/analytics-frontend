@@ -1,37 +1,64 @@
 {
   "server": {
     "protocol": "http",
-    "host": "ec2-18-229-255-40.sa-east-1.compute.amazonaws.com",
-    "port": "3000"
+    "host": "luoggo.com",
+    "port": "4000"
   },
   "templates": [
     {
       "name": "Museum",
       "merchants": [
         {
-          "name": "Chicken fil A",
+          "name": "Museum",
           "facilities": [
             {
               "name": "Kissimmee",
               "environments": [
                 {
-                  "name": "Main Store - Ground Floor",
-                  "url": "https://www.example.com",
+                  "name": "Main Hall - Ground Floor",
+                  "url": "https://luoggo.com/merchant/museum_of_modern_art/",
                   "beacons": [
                     {
                       "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
-                      "url": "https://www.example.com",
-                      "distance": 0.3
+                      "url": "https://luoggo.com/shop/painting/la-gioconda-mona-lisa-by-leonardo-da-vinci/",
+                      "distance": 0.4,
+                      "priority": 0
                     },
                     {
                       "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
-                      "url": "https://www.example.com",
-                      "distance": 0.3
+                      "url": "https://luoggo.com/shop/painting/marilyn-monroe-by-andy-warhol/",
+                      "distance": 0.4,
+                      "priority": 1
                     },
                     {
                       "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
-                      "url": "https://www.example.com",
-                      "distance": 0.3
+                      "url": "https://luoggo.com/shop/art/adam-by-auguste-rodin/",
+                      "distance": 0.4,
+                      "priority": 2
+                    }
+                  ]
+                },
+                {
+                  "name": "South America Exhibition",
+                  "url": "https://luoggo.com/merchant/museum_of_modern_art/",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "19bfabd1228e0d4ee2b15533256d28e3b",
+                      "url": "https://luoggo.com/shop/painting/la-gioconda-mona-lisa-by-leonardo-da-vinci/",
+                      "distance": 0.4,
+                      "priority": 0
+                    },
+                    {
+                      "publicIdentifier": "20c537df87dabfd1f5c5f20a6d33cfa39",
+                      "url": "https://luoggo.com/shop/painting/marilyn-monroe-by-andy-warhol/",
+                      "distance": 0.4,
+                      "priority": 1
+                    },
+                    {
+                      "publicIdentifier": "3187ffbbb5aae2eceac31ee5d03ad5026",
+                      "url": "https://luoggo.com/shop/art/adam-by-auguste-rodin/",
+                      "distance": 0.4,
+                      "priority": 2
                     }
                   ]
                 }
@@ -51,23 +78,132 @@
               "name": "Kissimmee",
               "environments": [
                 {
-                  "name": "Main Store - Ground Floor",
-                  "url": "https://www.example.com",
+                  "name": "Main Indoor Floor",
+                  "url": "https://luoggo.com/merchant/fastfood/",
                   "beacons": [
                     {
                       "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
-                      "url": "https://www.example.com",
-                      "distance": 0.3
+                      "url": "https://luoggo.com/shop/drink/coca-cola/",
+                      "distance": 0.4,
+                      "priority": 0
                     },
                     {
                       "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
-                      "url": "https://www.example.com",
-                      "distance": 0.3
+                      "url": "https://luoggo.com/shop/food/full-stack-burger/",
+                      "distance": 0.4,
+                      "priority": 1
                     },
                     {
                       "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
-                      "url": "https://www.example.com",
-                      "distance": 0.3
+                      "url": "https://luoggo.com/cart/",
+                      "distance": 0.4,
+                      "priority": 2
+                    }
+                  ]
+                },
+                {
+                  "name": "Parking",
+                  "url": "https://luoggo.com/merchant/museum_of_modern_art/",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
+                      "url": "https://luoggo.com/shop/painting/la-gioconda-mona-lisa-by-leonardo-da-vinci/",
+                      "distance": 0.4,
+                      "priority": 0
+                    },
+                    {
+                      "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
+                      "url": "https://luoggo.com/shop/painting/marilyn-monroe-by-andy-warhol/",
+                      "distance": 0.4,
+                      "priority": 1
+                    },
+                    {
+                      "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
+                      "url": "https://luoggo.com/shop/art/adam-by-auguste-rodin/",
+                      "distance": 0.4,
+                      "priority": 2
+                    }
+                  ]
+                },
+                {
+                  "name": "Drive-Thru",
+                  "url": "https://luoggo.com/merchant/museum_of_modern_art/",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
+                      "url": "https://luoggo.com/shop/painting/la-gioconda-mona-lisa-by-leonardo-da-vinci/",
+                      "distance": 0.4,
+                      "priority": 0
+                    },
+                    {
+                      "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
+                      "url": "https://luoggo.com/shop/painting/marilyn-monroe-by-andy-warhol/",
+                      "distance": 0.4,
+                      "priority": 1
+                    },
+                    {
+                      "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
+                      "url": "https://luoggo.com/shop/art/adam-by-auguste-rodin/",
+                      "distance": 0.4,
+                      "priority": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "New York",
+              "environments": [
+                {
+                  "name": "Main Store - Ground Floor",
+                  "url": "https://luoggo.com/merchant/museum_of_modern_art/",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
+                      "url": "https://luoggo.com/shop/painting/la-gioconda-mona-lisa-by-leonardo-da-vinci/",
+                      "distance": 0.4,
+                      "priority": 0
+                    },
+                    {
+                      "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
+                      "url": "https://luoggo.com/shop/painting/marilyn-monroe-by-andy-warhol/",
+                      "distance": 0.4,
+                      "priority": 1
+                    },
+                    {
+                      "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
+                      "url": "https://luoggo.com/shop/art/adam-by-auguste-rodin/",
+                      "distance": 0.4,
+                      "priority": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Silicon Valley",
+              "environments": [
+                {
+                  "name": "Main Store - Ground Floor",
+                  "url": "https://luoggo.com/merchant/museum_of_modern_art/",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
+                      "url": "https://luoggo.com/shop/painting/la-gioconda-mona-lisa-by-leonardo-da-vinci/",
+                      "distance": 0.4,
+                      "priority": 0
+                    },
+                    {
+                      "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
+                      "url": "https://luoggo.com/shop/painting/marilyn-monroe-by-andy-warhol/",
+                      "distance": 0.4,
+                      "priority": 1
+                    },
+                    {
+                      "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
+                      "url": "https://luoggo.com/shop/art/adam-by-auguste-rodin/",
+                      "distance": 0.4,
+                      "priority": 2
                     }
                   ]
                 }
@@ -81,29 +217,284 @@
       "name": "Apple Store",
       "merchants": [
         {
-          "name": "Chicken fil A",
+          "name": "Apple",
           "facilities": [
             {
               "name": "Kissimmee",
               "environments": [
                 {
                   "name": "Main Store - Ground Floor",
-                  "url": "https://www.example.com",
+                  "url": "https://luoggo.com/merchant/apple/",
                   "beacons": [
                     {
                       "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
-                      "url": "https://www.example.com",
-                      "distance": 0.3
+                      "url": "https://luoggo.com/shop/technology/watch-serie-9-steel/",
+                      "distance": 0.4,
+                      "priority": 0
                     },
                     {
                       "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
-                      "url": "https://www.example.com",
-                      "distance": 0.3
+                      "url": "https://luoggo.com/shop/computer/macbook-air-m2-2023/",
+                      "distance": 0.4,
+                      "priority": 1
                     },
                     {
                       "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
-                      "url": "https://www.example.com",
-                      "distance": 0.3
+                      "url": "https://luoggo.com/cart/",
+                      "distance": 0.4,
+                      "priority": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Los Angeles",
+              "environments": [
+                {
+                  "name": "Main Store - Ground Floor",
+                  "url": "https://luoggo.com/merchant/museum_of_modern_art/",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
+                      "url": "https://luoggo.com/shop/painting/la-gioconda-mona-lisa-by-leonardo-da-vinci/",
+                      "distance": 0.4,
+                      "priority": 0
+                    },
+                    {
+                      "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
+                      "url": "https://luoggo.com/shop/painting/marilyn-monroe-by-andy-warhol/",
+                      "distance": 0.4,
+                      "priority": 1
+                    },
+                    {
+                      "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
+                      "url": "https://luoggo.com/shop/art/adam-by-auguste-rodin/",
+                      "distance": 0.4,
+                      "priority": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Miami",
+              "environments": [
+                {
+                  "name": "Main Store - Ground Floor",
+                  "url": "https://luoggo.com/merchant/museum_of_modern_art/",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
+                      "url": "https://luoggo.com/shop/painting/la-gioconda-mona-lisa-by-leonardo-da-vinci/",
+                      "distance": 0.4,
+                      "priority": 0
+                    },
+                    {
+                      "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
+                      "url": "https://luoggo.com/shop/painting/marilyn-monroe-by-andy-warhol/",
+                      "distance": 0.4,
+                      "priority": 1
+                    },
+                    {
+                      "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
+                      "url": "https://luoggo.com/shop/art/adam-by-auguste-rodin/",
+                      "distance": 0.4,
+                      "priority": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "New York",
+              "environments": [
+                {
+                  "name": "Main Store - Ground Floor",
+                  "url": "https://luoggo.com/merchant/museum_of_modern_art/",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
+                      "url": "https://luoggo.com/shop/painting/la-gioconda-mona-lisa-by-leonardo-da-vinci/",
+                      "distance": 0.4,
+                      "priority": 0
+                    },
+                    {
+                      "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
+                      "url": "https://luoggo.com/shop/painting/marilyn-monroe-by-andy-warhol/",
+                      "distance": 0.4,
+                      "priority": 1
+                    },
+                    {
+                      "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
+                      "url": "https://luoggo.com/shop/art/adam-by-auguste-rodin/",
+                      "distance": 0.4,
+                      "priority": 2
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DIY SuperStore",
+      "merchants": [
+        {
+          "name": "DIY SuperStore",
+          "facilities": [
+            {
+              "name": "São Paulo (main)",
+              "environments": [
+                {
+                  "name": "Appliances",
+                  "url": "https://luoggo.com/merchant/dyi-super-store/",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
+                      "url": "https://luoggo.com/shop/appliance/lg-fridge-freezer-inverted-smart/",
+                      "distance": 0.4,
+                      "priority": 0
+                    },
+                    {
+                      "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
+                      "url": "https://luoggo.com/shop/appliance/smart-tv-qled-65-samsung/",
+                      "distance": 0.4,
+                      "priority": 1
+                    },
+                    {
+                      "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
+                      "url": "https://luoggo.com/cart/",
+                      "distance": 0.4,
+                      "priority": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Rio de Janeiro",
+              "environments": [
+                {
+                  "name": "Environment 1",
+                  "url": "https://luoggo.com/merchant/museum_of_modern_art/",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
+                      "url": "https://luoggo.com/shop/painting/la-gioconda-mona-lisa-by-leonardo-da-vinci/",
+                      "distance": 0.4,
+                      "priority": 0
+                    },
+                    {
+                      "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
+                      "url": "https://luoggo.com/shop/painting/marilyn-monroe-by-andy-warhol/",
+                      "distance": 0.4,
+                      "priority": 1
+                    },
+                    {
+                      "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
+                      "url": "https://luoggo.com/shop/art/adam-by-auguste-rodin/",
+                      "distance": 0.4,
+                      "priority": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Florianópolis",
+              "environments": [
+                {
+                  "name": "Environment 1",
+                  "url": "https://luoggo.com/merchant/museum_of_modern_art/",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
+                      "url": "https://luoggo.com/shop/painting/la-gioconda-mona-lisa-by-leonardo-da-vinci/",
+                      "distance": 0.4,
+                      "priority": 0
+                    },
+                    {
+                      "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
+                      "url": "https://luoggo.com/shop/painting/marilyn-monroe-by-andy-warhol/",
+                      "distance": 0.4,
+                      "priority": 1
+                    },
+                    {
+                      "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
+                      "url": "https://luoggo.com/shop/art/adam-by-auguste-rodin/",
+                      "distance": 0.4,
+                      "priority": 2
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "New York",
+              "environments": [
+                {
+                  "name": "Environment 1",
+                  "url": "https://luoggo.com/merchant/museum_of_modern_art/",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
+                      "url": "https://luoggo.com/shop/painting/la-gioconda-mona-lisa-by-leonardo-da-vinci/",
+                      "distance": 0.4,
+                      "priority": 0
+                    },
+                    {
+                      "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
+                      "url": "https://luoggo.com/shop/painting/marilyn-monroe-by-andy-warhol/",
+                      "distance": 0.4,
+                      "priority": 1
+                    },
+                    {
+                      "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
+                      "url": "https://luoggo.com/shop/art/adam-by-auguste-rodin/",
+                      "distance": 0.4,
+                      "priority": 2
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TEST",
+      "merchants": [
+        {
+          "name": "Merchant 1",
+          "facilities": [
+            {
+              "name": "Facility 1",
+              "environments": [
+                {
+                  "name": "Environment 1",
+                  "url": "https://luoggo.com/merchant/museum_of_modern_art/",
+                  "beacons": [
+                    {
+                      "publicIdentifier": "3cc9ea23bb44f5b16db4add2ace1a821",
+                      "url": "https://luoggo.com/shop/painting/la-gioconda-mona-lisa-by-leonardo-da-vinci/",
+                      "distance": 0.3,
+                      "priority": 0
+                    },
+                    {
+                      "publicIdentifier": "bed3d713a50d60a0ae2101bf70538e1e",
+                      "url": "https://luoggo.com/shop/painting/marilyn-monroe-by-andy-warhol/",
+                      "distance": 0.3,
+                      "priority": 1
+                    },
+                    {
+                      "publicIdentifier": "a5a1aa06f8d989cad3b225bef2e7a12a",
+                      "url": "https://luoggo.com/shop/art/adam-by-auguste-rodin/",
+                      "distance": 0.3,
+                      "priority": 2
                     }
                   ]
                 }

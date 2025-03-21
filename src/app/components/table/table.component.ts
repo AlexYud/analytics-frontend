@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { EditModalComponent } from '../edit-modal/edit-modal.component';
 import { ChartService } from 'src/app/services/chart.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -15,24 +16,12 @@ export class TableComponent implements OnInit {
   @Input('entityName') entityName: string = 'error';
   @Input('id') id: any = '-1';
   @Input('name') name: string = 'all';
-  // public data: any[] = [
-  //   {
-  //     id: 0,
-  //     name: 'test'
-  //   },
-  //   {
-  //     id: 1,
-  //     name: 'test1'
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'test2'
-  //   },
-  // ];
   public data: any[] = [];
   public results = [...this.data];
 
   public connectedUserData: number[] = [];
+
+  public dataChartError: boolean = false;
 
   public dataChart = {
     labels: [
@@ -88,6 +77,9 @@ export class TableComponent implements OnInit {
     },
   };
 
+  private interval: any;
+  private observable: any;
+
   constructor(
     private modalCtrl: ModalController,
     private router: Router,
@@ -99,6 +91,21 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.apiService.isService = false;
     this.get();
+    if (this.apiService.nextEntity(this.entityName) === 'beacons') this.interval = setInterval(() => {
+      this.get();
+    }, 1000);
+    this.observable = this.apiService.getTemplateChanged().subscribe(res => {
+      this.utilsService.showLoading();
+      setTimeout(() => {
+        this.utilsService.dismissLoading();
+        this.get();
+      }, 4000)
+    });
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.interval);
+    this.observable.unsubscribe();
   }
 
   searchbarInput(event: any) {
@@ -109,32 +116,41 @@ export class TableComponent implements OnInit {
   }
 
   get() {
-    const res = [
-      {
-        id: 'test1',
-        devices: [{id: 'device1'}],
-        connectedUsers: Math.floor(Math.random() * 5),
+    // setTimeout(() => {
+    //   const res = [
+    //     {
+    //       id: 'test1',
+    //       devices: [{ id: 'device1' }],
+    //       connectedUsers: Math.floor(Math.random() * 5),
+    //     },
+    //     {
+    //       id: 'test2',
+    //       devices: [{ id: 'device1' }],
+    //       connectedUsers: Math.floor(Math.random() * 5),
+    //     },
+    //     {
+    //       id: 'test3',
+    //       devices: [{ id: 'device1' }],
+    //       connectedUsers: Math.floor(Math.random() * 5),
+    //     }
+    //   ]
+    //   this.chartData(res)
+    // }, 2000)
+
+    this.apiService.get(this.entityName, this.id).subscribe({
+      next: (res) => {
+        console.log("get res: ", res);
+        this.data = res;
+        this.results = [...this.data];
+        if (this.entityName === "environments") this.chartData(res);
       },
-      {
-        id: 'test2',
-        devices: [{id: 'device1'}],
-        connectedUsers: Math.floor(Math.random() * 5),
-      },
-      {
-        id: 'test3',
-        devices: [{id: 'device1'}],
-        connectedUsers: Math.floor(Math.random() * 5),
+      error: (err) => {
+        this.data = [];
+        this.results = [...this.data];
+        this.utilsService.showToast('Could not get items', 'danger', 'close-circle');
+        this.dataChartError = true;
       }
-    ]
-    this.chartData(res)
-    // this.apiService.get(this.entityName, this.id).subscribe({
-    //   next: (res) => {
-    //     this.data = res;
-    //     this.results = [...this.data];
-    //     if (this.entityName === "environments") this.chartData(res);
-    //   },
-    //   error: (err) => this.utilsService.showToast('Could not get items', 'danger', 'close-circle')
-    // })
+    })
   }
 
   chartData(data: any[]) {
@@ -159,6 +175,7 @@ export class TableComponent implements OnInit {
       }
     }
     this.dataChart.datasets[0].data.push(envConnectedUsers.size);
+
     this.chartService.setDataChart(this.dataChart);
   }
 

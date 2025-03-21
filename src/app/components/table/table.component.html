@@ -1,20 +1,33 @@
 <ion-grid class="ion-margin-top">
-  <!-- <ion-row *ngIf="entityName === 'environments'"
+  <ion-row *ngIf="apiService.nextEntity(entityName) === 'beacons'"
     class="ion-justify-content-center ion-align-items-center ion-text-center">
     <ion-col size="11">
-      <ion-card class="ion-padding" >
-        <app-chart [data]="dataChart"></app-chart>
+      <ion-card class="ion-padding">
+        <app-chart *ngIf="dataChart.labels.length > 1" [data]="dataChart" [options]="optionsChart"></app-chart>
+        <div *ngIf="dataChart.labels.length == 1" style="height: 50vh;" class="flex-center">
+          <ion-spinner *ngIf="!dataChartError" name="crescent" color="primary"
+            class="ion-padding ion-margin"></ion-spinner>
+          <div *ngIf="dataChartError">
+            <ion-grid style="height: auto;">
+              <ion-row>
+                <ion-col>
+                  <img src="../../../assets/chartError.svg" alt="home">
+                </ion-col>
+                <ion-col class="ion-text-start ion-padding-start ion-margin-start">
+                  <ion-title class="ion-no-padding" style="font-size: 3em;">No data...</ion-title>
+                  <br>
+                  <br>
+                  <ion-note>
+                    The chart could not be loaded due to lack of data.
+                  </ion-note>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </div>
       </ion-card>
     </ion-col>
-  </ion-row> -->
-  <ion-row 
-  class="ion-justify-content-center ion-align-items-center ion-text-center">
-  <ion-col size="11">
-    <ion-card class="ion-padding" >
-      <app-chart [data]="dataChart" [options]="optionsChart"></app-chart>
-    </ion-card>
-  </ion-col>
-</ion-row>
+  </ion-row>
   <ion-row class="ion-justify-content-center ion-align-items-center ion-text-center">
     <ion-col size="9">
       <ion-searchbar class="ion-text-start" show-cancel-button="never" placeholder="Search by name or id" color="light"

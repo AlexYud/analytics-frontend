@@ -17,8 +17,8 @@ export class ChartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    document.getElementsByTagName("canvas")[Number(this.canvasId)].setAttribute("id", this.canvasId);
-    // document.getElementsByTagName("canvas")[0].setAttribute("id", this.canvasId);
+    // if (this.data.labels.length > 1) document.getElementsByTagName("canvas")[Number(this.canvasId)].setAttribute("id", this.canvasId);
+    if (this.data.labels.length > 1) document.getElementsByTagName("canvas")[0].setAttribute("id", this.canvasId);
 
     var chart = new Chart(
       document.getElementById(this.canvasId) as HTMLCanvasElement,
@@ -28,9 +28,11 @@ export class ChartComponent implements OnInit {
         options: this.options
       }
     );
-
+      
     this.chartService.getDataChart().subscribe(data => {
       setTimeout(() => {
+        // console.log(data);
+        
         chart.data = data;
         chart.update();
       }, 100);
