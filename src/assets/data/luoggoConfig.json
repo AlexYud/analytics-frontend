@@ -1,7 +1,7 @@
 {
   "server": {
     "protocol": "http",
-    "host": "localhost",
+    "host": "luoggo.com",
     "port": "4000"
   },
   "templates": [
