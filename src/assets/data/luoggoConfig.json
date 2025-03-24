@@ -1,6 +1,6 @@
 {
   "server": {
-    "protocol": "http",
+    "protocol": "https",
     "host": "luoggo.com",
     "port": "4000"
   },
