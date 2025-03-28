@@ -1,8 +1,8 @@
 {
   "server": {
     "protocol": "https",
-    "host": "https://analytics-backend-oywy.onrender.com",
-    "port": "8080"
+    "host": "analytics-backend-oywy.onrender.com",
+    "port": ""
   },
   "templates": [
     {
