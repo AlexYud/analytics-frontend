@@ -1,8 +1,8 @@
 {
   "server": {
     "protocol": "https",
-    "host": "luoggo.com",
-    "port": "4000"
+    "host": "https://analytics-backend-oywy.onrender.com",
+    "port": "8080"
   },
   "templates": [
     {
