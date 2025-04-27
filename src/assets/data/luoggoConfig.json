@@ -16,24 +16,24 @@
               "environments": [
                 {
                   "name": "Fila",
-                  "url": "https://luoggo.com/product/cs-trufa-tradicional-zero-adic%cc%a7a%cc%83o-de-ac%cc%a7ucar-30g-sku-1002983/",
+                  "url": "https://luoggo.com/shop/",
                   "beacons": [
                     {
                       "publicIdentifier": "9bfabd1228e0d4ee2b15533256d28e3b",
-                      "url": "https://luoggo.com/shop/painting/la-gioconda-mona-lisa-by-leonardo-da-vinci/",
-                      "distance": 0.4,
+                      "url": "https://luoggo.com/cart/",
+                      "distance": 1,
                       "priority": 0
                     },
                     {
                       "publicIdentifier": "0c537df87dabfd1f5c5f20a6d33cfa39",
-                      "url": "https://luoggo.com/shop/painting/marilyn-monroe-by-andy-warhol/",
-                      "distance": 0.4,
+                      "url": "https://luoggo.com/product/cs-trufa-tradicional-zero-adic%cc%a7a%cc%83o-de-ac%cc%a7ucar-30g-sku-1002983/",
+                      "distance": 1,
                       "priority": 1
                     },
                     {
                       "publicIdentifier": "187ffbbb5aae2eceac31ee5d03ad5026",
-                      "url": "https://luoggo.com/shop/art/adam-by-auguste-rodin/",
-                      "distance": 0.4,
+                      "url": "https://luoggo.com/product/cs-trufa-bless-zero-adic%cc%a7a%cc%83o-de-ac%cc%a7ucar-branco-30g-sku-1003392/",
+                      "distance": 1,
                       "priority": 2
                     }
                   ]
